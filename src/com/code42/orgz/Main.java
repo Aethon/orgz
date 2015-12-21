@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         if (args.length < 2 || args.length > 3) {
-            System.out.print("USAGE: orgz org_filename users_filename [report_filename]");
+            System.out.println("USAGE: orgz org_filename users_filename [report_filename]");
             System.exit(1);
             return;
         }
@@ -50,9 +50,9 @@ public class Main {
         }
     }
 
-    private static void report(PrintStream stream, List<IOrgBean> orgs, String indent) {
+    private static void report(PrintStream stream, List<OrgBean> orgs, String indent) {
         String childIndent = indent + "  ";
-        for (IOrgBean org : orgs) {
+        for (OrgBean org : orgs) {
             stream.printf("%s%d,%d,%d,%d", indent, org.getId(), org.getTotalNumUsers(), org.getTotalNumFiles(), org.getTotalNumBytes());
             stream.println();
             report(stream, org.getChildOrgs(), childIndent);

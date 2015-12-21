@@ -2,10 +2,11 @@ package com.code42.orgz;
 
 import java.util.List;
 
-public interface IOrgBean {
+public interface OrgBean {
     int getId();
     int getTotalNumUsers();
     int getTotalNumFiles();
     int getTotalNumBytes();
-    List<IOrgBean> getChildOrgs();
+    List<OrgBean> getChildOrgs();
 }
+

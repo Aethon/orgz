@@ -5,10 +5,10 @@ import java.util.List;
 
 public final class OrgLoadResult {
     private final List<String> errors;
-    private final IOrgCollection collection;
-    private final List<IOrgBean> roots;
+    private final OrgCollection collection;
+    private final List<OrgBean> roots;
 
-    public OrgLoadResult(IOrgCollection collection, List<IOrgBean> roots, List<String> errors) {
+    public OrgLoadResult(OrgCollection collection, List<OrgBean> roots, List<String> errors) {
         this.collection = collection;
         this.roots = Collections.unmodifiableList(roots);
         this.errors = Collections.unmodifiableList(errors);
@@ -22,11 +22,11 @@ public final class OrgLoadResult {
         return errors;
     }
 
-    public IOrgCollection getCollection() {
+    public OrgCollection getCollection() {
         return collection;
     }
 
-    public List<IOrgBean> getRoots() {
+    public List<OrgBean> getRoots() {
         return roots;
     }
 }

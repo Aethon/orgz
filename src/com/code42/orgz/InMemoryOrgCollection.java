@@ -4,24 +4,24 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public final class InMemoryOrgCollection implements IOrgCollection {
+public final class InMemoryOrgCollection implements OrgCollection {
 
-    private final List<IOrgBean> roots;
+    private final List<OrgBean> roots;
 
-    public InMemoryOrgCollection(List<IOrgBean> roots) {
+    public InMemoryOrgCollection(List<OrgBean> roots) {
         this.roots = Collections.unmodifiableList(roots);
     }
 
     @Override
-    public IOrgBean getOrg(int orgId) {
+    public OrgBean getOrg(int orgId) {
         return getOrg(orgId, roots);
     }
 
-    private IOrgBean getOrg(int orgId, List<IOrgBean> roots) {
-        for (IOrgBean root : roots) {
+    private OrgBean getOrg(int orgId, List<OrgBean> roots) {
+        for (OrgBean root : roots) {
             if (root.getId() == orgId)
                 return root;
-            IOrgBean org = getOrg(orgId, root.getChildOrgs());
+            OrgBean org = getOrg(orgId, root.getChildOrgs());
             if (org != null)
                 return org;
         }
@@ -29,19 +29,19 @@ public final class InMemoryOrgCollection implements IOrgCollection {
     }
 
     @Override
-    public List<IOrgBean> getOrgTree(int orgId, boolean inclusive) {
-        IOrgBean org = getOrg(orgId);
+    public List<OrgBean> getOrgTree(int orgId, boolean inclusive) {
+        OrgBean org = getOrg(orgId);
         if (org == null)
             return null;
-        List<IOrgBean> result = new ArrayList<>();
+        List<OrgBean> result = new ArrayList<>();
         if (inclusive) {
             result.add(org);
         }
-        List<IOrgBean> queue = new ArrayList<>();
+        List<OrgBean> queue = new ArrayList<>();
         queue.add(org);
         while (!queue.isEmpty()) {
-            IOrgBean next = queue.remove(0);
-            List<IOrgBean> children = next.getChildOrgs();
+            OrgBean next = queue.remove(0);
+            List<OrgBean> children = next.getChildOrgs();
             result.addAll(children);
             queue.addAll(children);
         }

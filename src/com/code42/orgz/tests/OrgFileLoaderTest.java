@@ -25,8 +25,8 @@ public class OrgFileLoaderTest {
         OrgLoadResult result = OrgFileLoader.Load(orgs, users);
 
         Assert.that(!result.hasErrors(), "should not have errors");
-        IOrgCollection collection = result.getCollection();
-        IOrgBean org = collection.getOrg(expectation.getId());
+        OrgCollection collection = result.getCollection();
+        OrgBean org = collection.getOrg(expectation.getId());
         Assert.that(org != null, "should have expected org ID");
         Assert.that(org.getTotalNumUsers() == expectation.getTotalNumUsers(), "should have expected user count");
         Assert.that(org.getTotalNumFiles() == expectation.getTotalNumFiles(), "should have expected file count");

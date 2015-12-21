@@ -3,7 +3,7 @@ package com.code42.orgz;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InMemoryOrgBean implements IOrgBean {
+public class InMemoryOrgBean implements OrgBean {
 
     private final int orgId;
     private Integer parentId;
@@ -12,7 +12,7 @@ public class InMemoryOrgBean implements IOrgBean {
     private int numFiles = 0;
     private int numUsers = 0;
 
-    private final List<IOrgBean> children = new ArrayList<>();
+    private final List<OrgBean> children = new ArrayList<>();
 
     private boolean frozen;
 
@@ -49,7 +49,7 @@ public class InMemoryOrgBean implements IOrgBean {
             return false;
         }
         frozen = true;
-        for (IOrgBean child : children) {
+        for (OrgBean child : children) {
             if (!((InMemoryOrgBean)child).freeze(errors)) {
                 errors.add(String.format("Org ID %d participates in a circular reference (counts will be incorrect)", child.getId()));
                 return false;
@@ -79,7 +79,7 @@ public class InMemoryOrgBean implements IOrgBean {
     }
 
     @Override
-    public List<IOrgBean> getChildOrgs() {
+    public List<OrgBean> getChildOrgs() {
         return children;
     }
 }
